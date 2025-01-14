@@ -13,21 +13,12 @@ decode QR codes. The script was originally made for transfering keys into [Pass 
 
 ## Usage
 
-Execute `./asc-to-gif.sh input.txt output.gif`.
-
-An example of exporting ASCII-armored PGP keys and generate QR codes.
-
-    gpg --export -a "Key ID" > public.asc
-    gpg --export-secret-keys -a "Key ID" > private.asc
-    ./asc-to-gif.sh public.asc public.gif
-    ./asc-to-gif.sh private.asc private.gif
-
-### Docker
-
-You can use [docker](https://docs.docker.com/) to perform the conversions:
-
-```
-docker build . -t asc-key-to-qr-code-gif
-docker run --rm -v $(pwd):/data -e "SRC=/data/public.asc" -e "DST=/data/public.gif" asc-key-to-qr-code-gif
-docker run --rm -v $(pwd):/data -e "SRC=/data/private.asc" -e "DST=/data/private.gif" asc-key-to-qr-code-gif
+```bash
+# find gpg key id
+gpg --list-keys
+# generate gif's for a given key id
+make KEY_ID=xxxxxxxxxxxxxx
+# scan gif's in pass for ios app
+imgcat public.gif
+imgcat private.gif
 ```
